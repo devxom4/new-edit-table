@@ -1,0 +1,122 @@
+{
+  "visualizations": {
+    "viz_editTable": {
+      "type": "splunk.EditTable",
+      "options": {
+        "showTooltip": true,
+        "showEndDot": true,
+        "endDotCount": 0,
+        "endDotRadius": 3,
+        "endDotFillColor": "white",
+        "endDotStroke": "black",
+        "endDotStrokeWidth": 2,
+        "fillColor": "#f7912c",
+        "fillOpacity": "0.2",
+        "height": 50,
+        "isArea": true,
+        "cursorStroke": "#f7912c",
+        "cursorStrokeWidth": 3,
+        "cursorStrokeLinecap": "square",
+        "cursorStrokeDasharray": "1,5",
+        "lineColor": "#6cb8ca",
+        "lineStrokeWidth": 4,
+        "lineLength": 10,
+        "width": 240,
+        "collection": "example_collection",
+        "model": {
+          "Score": {
+            "type": "number",
+            "props": {
+              "min": 0,
+              "max": 1000
+            }
+          },
+          "Title": {
+            "type": "enum",
+            "options": ["Something 1", "Something 2", "Something 3"],
+            "props": {}
+          },
+          "Year": {
+            "type": "number",
+            "props": {
+              "min": 1900,
+              "max": 2100
+            }
+          }
+        }
+      },
+      "dataSources": {
+        "primary": "ds_search_1"
+      }
+    },
+    "viz_header": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "## KV Store Editor "
+      }
+    },
+    "viz_subheader": {
+      "type": "splunk.markdown",
+      "options": {
+        "markdown": "Editor for a Splunk key value store."
+      }
+    }
+  },
+  "dataSources": {
+    "ds_search_1": {
+      "type": "ds.search",
+      "options": {
+        "query": "| inputlookup example_kv",
+        "queryParameters": {
+          "earliest": "0"
+        }
+      }
+    }
+  },
+  "defaults": {},
+  "inputs": {},
+  "layout": {
+    "type": "absolute",
+    "options": {
+      "display": "auto-scale",
+      "width": 1440,
+      "height": 650,
+      "backgroundColor": "#000000"
+    },
+    "structure": [
+      {
+        "item": "viz_editTable",
+        "type": "block",
+        "position": {
+          "x": 30,
+          "y": 120,
+          "w": 1320,
+          "h": 500
+        }
+      },
+      {
+        "item": "viz_header",
+        "type": "block",
+        "position": {
+          "x": 20,
+          "y": 0,
+          "w": 630,
+          "h": 90
+        }
+      },
+      {
+        "item": "viz_subheader",
+        "type": "block",
+        "position": {
+          "x": 20,
+          "y": 70,
+          "w": 1380,
+          "h": 40
+        }
+      }
+    ],
+    "globalInputs": []
+  },
+  "description": "",
+  "title": "KV Store Editor"
+}
