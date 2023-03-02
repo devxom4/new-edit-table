@@ -25,7 +25,7 @@ const TableButtonActionGroup = styled.div`
 
 const EditTable = (props) => {
     const { id, dataSources, onRequestParamsChange, width, height, options } = props;
-    const { collection: collectionName, model } = options;
+    const { splunkApp, collection: collectionName, model } = options;
     const { api } = useDashboardApi();
 
     const style = useMemo(
@@ -64,7 +64,7 @@ const EditTable = (props) => {
         setOpenModal(false);
         setInfoMessage({ visible: true, message: 'Updating...' });
         const defaultErrorMsg = 'Error updating row. Please try again.';
-        updateKVEntry(collectionName, row._key, row, defaultErrorMsg)
+        updateKVEntry(collectionName, row._key, row, defaultErrorMsg, splunkApp)
             .then(() => {
                 setInfoMessage({
                     visible: true,
@@ -82,7 +82,7 @@ const EditTable = (props) => {
                 setInfoMessage({
                     visible: true,
                     type: 'error',
-                    message: err,
+                    message: err.message,
                 });
             });
     };

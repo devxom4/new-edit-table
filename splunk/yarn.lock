@@ -1003,6 +1003,17 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@devxom4/edit-table@^1.0.0":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@devxom4/edit-table/-/edit-table-1.1.1.tgz#a201edddcbf73c97d1ddc17009836938a7254d7d"
+  integrity sha512-TLKjHXgsnjjATDMuaHWpEun4d3SXsZyFImaKg7XCiOX/Mo8gHU7poUKd+WVwFfF4j0itr/HIF2j+B1Rnjyjytw==
+  dependencies:
+    "@splunk/dashboard-action-buttons" "^23.4.0"
+    "@splunk/react-ui" "^4.4.0"
+    "@splunk/splunk-utils" "^2.1.0"
+    "@splunk/themes" "^0.8.0"
+    csvtojson "^2.0.10"
+
 "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
   resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz"

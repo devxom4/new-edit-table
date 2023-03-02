@@ -1,7 +1,7 @@
 import * as config from '@splunk/splunk-utils/config';
 import { customFetch } from './utils/api';
 
-async function updateKVEntry(collection, key, data, defaultErrorMsg) {
+async function updateKVEntry(collection, key, data, defaultErrorMsg, splunkApp = config.app) {
     const path = `storage/collections/data/${collection}/${encodeURIComponent(key)}`;
     const requestInit = {
         method: 'POST',
@@ -13,7 +13,7 @@ async function updateKVEntry(collection, key, data, defaultErrorMsg) {
         },
         body: JSON.stringify(data),
     };
-    const response = await customFetch(path, requestInit);
+    const response = await customFetch(path, requestInit, splunkApp);
     if (!response.ok) {
         throw new Error(response.statusText || defaultErrorMsg);
     }
