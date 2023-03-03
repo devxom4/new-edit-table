@@ -25,7 +25,7 @@ const TableButtonActionGroup = styled.div`
 
 const EditTable = (props) => {
     const { id, dataSources, onRequestParamsChange, width, height, options } = props;
-    const { splunkApp, collection: collectionName, model } = options;
+    const { collection: collectionName, model } = options;
     const { api } = useDashboardApi();
 
     const style = useMemo(
@@ -64,7 +64,7 @@ const EditTable = (props) => {
         setOpenModal(false);
         setInfoMessage({ visible: true, message: 'Updating...' });
         const defaultErrorMsg = 'Error updating row. Please try again.';
-        updateKVEntry(collectionName, row._key, row, defaultErrorMsg, splunkApp)
+        updateKVEntry(collectionName, row._key, row, defaultErrorMsg)
             .then(() => {
                 setInfoMessage({
                     visible: true,
@@ -82,7 +82,7 @@ const EditTable = (props) => {
                 setInfoMessage({
                     visible: true,
                     type: 'error',
-                    message: err.message,
+                    message: err,
                 });
             });
     };
@@ -114,7 +114,7 @@ const EditTable = (props) => {
         const emptyErrorMsg = 'No data to download.';
 
         try {
-            const data = await getAllKVEntries(collectionName, defaultErrorMsg, splunkApp);
+            const data = await getAllKVEntries(collectionName, defaultErrorMsg);
             if (data == null || data.length === 0) {
                 throw new Error(emptyErrorMsg);
             }
@@ -146,14 +146,6 @@ const EditTable = (props) => {
         );
     }
 
-    const fields = tableMetadata.dataFields;
-    const headers = fields.map((key) => model[key]?.label || key);
-
-    console.log(dataSources);
-    console.log(fields);
-    console.log(model);
-    console.log(headers);
-
     return (
         <div style={style}>
             {infoMessage.visible && (
@@ -183,7 +175,6 @@ const EditTable = (props) => {
                 uploadModalOpen={uploadModalOpen}
                 setUploadModalOpen={setUploadModalOpen}
                 collectionName={collectionName}
-                splunkApp={splunkApp}
                 tableMetadata={tableMetadata}
                 setInfoMessage={setInfoMessage}
                 refreshVisualization={refreshVisualization}
@@ -199,9 +190,6 @@ const EditTable = (props) => {
                 /> 
             */}
             <Table
-                options={{
-                    headers,
-                }}
                 width={width}
                 height={height}
                 dataSources={dataSources}

@@ -25,8 +25,6 @@
         "collection": "example_collection",
         "model": {
           "Score": {
-            "label": "ScoreInput",
-            "order": 1,
             "type": "number",
             "props": {
               "min": 0,
@@ -34,15 +32,11 @@
             }
           },
           "Title": {
-            "label": "TitleInput",
-            "order": 2,
             "type": "enum",
             "options": ["Something 1", "Something 2", "Something 3"],
             "props": {}
           },
           "Year": {
-            "label": "YearInput",
-            "order": 3,
             "type": "number",
             "props": {
               "min": 1900,

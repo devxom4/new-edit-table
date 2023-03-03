@@ -10,12 +10,15 @@ const DataFields = ({ data, handleChange, model }) => {
     const renderInputField = useCallback(
         (key) => {
             const fieldDefinition = model[key];
-            const { type, props, label } = fieldDefinition;
-            const fieldLabel = label || key;
+            if (!fieldDefinition) {
+                return null;
+            }
+
+            const { type, props } = fieldDefinition;
             switch (type) {
                 case 'string': {
                     return (
-                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
+                        <ControlGroup label={key} key={`group_${key}`}>
                             <Text
                                 canClear
                                 placeholder="value"
@@ -31,7 +34,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
                 case 'number': {
                     return (
-                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
+                        <ControlGroup label={key} key={`group_${key}`}>
                             <Number
                                 placeholder="value"
                                 key={`number_${key}`}
@@ -46,7 +49,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
                 case 'boolean': {
                     return (
-                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
+                        <ControlGroup label={key} key={`group_${key}`}>
                             <Switch
                                 key={`switch_${key}`}
                                 name={key}
@@ -61,7 +64,7 @@ const DataFields = ({ data, handleChange, model }) => {
                 case 'enum': {
                     const { options } = fieldDefinition;
                     return (
-                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
+                        <ControlGroup label={key} key={`group_${key}`}>
                             <Select
                                 key={`select_${key}`}
                                 name={key}
@@ -87,16 +90,7 @@ const DataFields = ({ data, handleChange, model }) => {
         [data, handleChange, model]
     );
 
-    console.log("data", data);
-    console.log("model", model);
-    console.log("sortedKey", Object.keys(data)
-    .filter((key) => !!model[key])
-    .sort((key1, key2) => model[key1].order - model[key2].order));
-
-    return Object.keys(data)
-        .filter((key) => !!model[key])
-        .sort((key1, key2) => model[key1].order || 0 - model[key2].order || 0)
-        .map((key) => renderInputField(key));
+    return Object.keys(data).map((key) => renderInputField(key));
 };
 
 DataFields.propTypes = {
