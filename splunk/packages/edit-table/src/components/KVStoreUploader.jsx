@@ -70,6 +70,7 @@ export default function KVStoreUploader({
             const formattedJsonData = projectFields(jsonData, dataFields);
 
             await deleteAllKVEntries(collectionName, deleteErrorMsg, splunkApp);
+            console.log(dataFields, jsonData, formattedJsonData)
             await batchInsertKVEntries(collectionName, formattedJsonData, uploadErrorMsg, splunkApp);
 
             setInfoMessage({
