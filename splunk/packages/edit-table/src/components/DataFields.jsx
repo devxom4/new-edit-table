@@ -10,10 +10,6 @@ const DataFields = ({ data, handleChange, model }) => {
     const renderInputField = useCallback(
         (key) => {
             const fieldDefinition = model[key];
-            if (!fieldDefinition) {
-                return null;
-            }
-
             const { type, props, label } = fieldDefinition;
             switch (type) {
                 case 'string': {
@@ -90,7 +86,10 @@ const DataFields = ({ data, handleChange, model }) => {
         [data, handleChange, model]
     );
 
-    return Object.keys(data).map((key) => renderInputField(key));
+    return Object.keys(data)
+        .filter((key) => !!model[key])
+        .sort((key1, key2) => model[key1].order || 0 - model[key2].order || 0)
+        .map((key) => renderInputField(key));
 };
 
 DataFields.propTypes = {
