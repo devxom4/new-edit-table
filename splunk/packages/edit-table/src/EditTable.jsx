@@ -106,7 +106,8 @@ const EditTable = (props) => {
         }
 
         // when a cell is clicked, the data we get is the label of table header, not the key
-        // e.g: if the header label is "Possible Causes", the row data will be {"Possible Causes": "something"}
+        // e.g: if the header label is "Possible Causes", the row data will be {"Possible Causes": "placeholder"}
+        // but the expectation is {"possible_causes": "placeholder"}
         // So, we need this function to convert the label to key in row data in order to 
         // handle it correctly in edit modal and other places
         function convertLabelObjectToKey(obj) {
@@ -165,7 +166,7 @@ const EditTable = (props) => {
     }
 
     const fields = tableMetadata.dataFields;
-    const headers = fields.map((key) => model[key]?.label || key);
+    const headers = fields.map((key) => labelMap.find(m => m.key === key)?.label || key);
 
     console.log('dataSources', dataSources);
     console.log('dataSources.fields', fields);
