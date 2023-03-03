@@ -6,12 +6,12 @@ import Text from '@splunk/react-ui/Text';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 
-const DataFields = ({ data, handleChange, model }) => {
+const DataFields = ({ data, handleChange, model, labelMap }) => {
     const renderInputField = useCallback(
         (key) => {
             const fieldDefinition = model[key];
-            const { type, props, label } = fieldDefinition;
-            const fieldLabel = label || key;
+            const { type, props } = fieldDefinition;
+            const fieldLabel = labelMap.find(m => m.key === key)?.label || key;
             switch (type) {
                 case 'string': {
                     return (
@@ -82,7 +82,7 @@ const DataFields = ({ data, handleChange, model }) => {
                     return null;
             }
         },
-        [data, handleChange, model]
+        [data, handleChange, labelMap, model]
     );
 
     console.log("data", data);
@@ -101,6 +101,7 @@ DataFields.propTypes = {
     data: PropTypes.object,
     handleChange: PropTypes.func,
     model: PropTypes.object,
+    labelMap: PropTypes.array
 };
 
 export default DataFields;

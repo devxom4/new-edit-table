@@ -25,7 +25,7 @@ const TableButtonActionGroup = styled.div`
 
 const EditTable = (props) => {
     const { id, dataSources, onRequestParamsChange, width, height, options } = props;
-    const { splunkApp, collection: collectionName, model } = options;
+    const { splunkApp, collection: collectionName, model, labelMap } = options;
     const { api } = useDashboardApi();
 
     const style = useMemo(
@@ -104,11 +104,26 @@ const EditTable = (props) => {
             }
             return row;
         }
-        console.log("handleCellClickEvent", e);
-        console.log("handleCellClickEvent.payload", e.payload);
-        console.log("handleCellClickEvent.payload.extractRow", extractRow(e.payload));
+
+        // when a cell is clicked, the data we get is the label of table header, not the key
+        // e.g: if the header label is "Possible Causes", the row data will be {"Possible Causes": "something"}
+        // So, we need this function to convert the label to key in row data in order to 
+        // handle it correctly in edit modal and other places
+        function convertLabelObjectToKey(obj) {
+            const newObj = {};
+            Object.keys(obj).forEach((label) => {
+                const key = labelMap.find((m) => m.label === label)?.key || label;
+                newObj[key] = obj[label];
+            });
+            return newObj;
+        }
+
+        console.log('handleCellClickEvent', e);
+        console.log('handleCellClickEvent.payload', e.payload);
+        console.log('handleCellClickEvent.payload.extractRow', extractRow(e.payload));
+        console.log('handleCellClickEvent.payload.extractRow.convertKey', convertLabelObjectToKey(extractRow(e.payload)));
         // extract row from payload and call click handler
-        handleEditActionClick(undefined, extractRow(e.payload));
+        handleEditActionClick(undefined, convertLabelObjectToKey(extractRow(e.payload)));
     };
 
     const handleDownloadAsCSV = async () => {
@@ -152,10 +167,10 @@ const EditTable = (props) => {
     const fields = tableMetadata.dataFields;
     const headers = fields.map((key) => model[key]?.label || key);
 
-    console.log("dataSources", dataSources);
-    console.log("dataSources.fields", fields);
-    console.log("model", model);
-    console.log("headers", headers);
+    console.log('dataSources', dataSources);
+    console.log('dataSources.fields', fields);
+    console.log('model', model);
+    console.log('headers', headers);
 
     return (
         <div style={style}>
@@ -181,6 +196,7 @@ const EditTable = (props) => {
                 onClose={handleOnClose}
                 onSave={handleOnSave}
                 model={model}
+                labelMap={labelMap}
             />
             <KVStoreUploader
                 uploadModalOpen={uploadModalOpen}
