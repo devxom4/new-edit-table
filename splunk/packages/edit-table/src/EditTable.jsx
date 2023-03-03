@@ -149,10 +149,10 @@ const EditTable = (props) => {
     const fields = tableMetadata.dataFields;
     const headers = fields.map((key) => model[key]?.label || key);
 
-    console.log(dataSources);
-    console.log(fields);
-    console.log(model);
-    console.log(headers);
+    console.log("dataSources", dataSources);
+    console.log("dataSources.fields", fields);
+    console.log("model", model);
+    console.log("headers", headers);
 
     return (
         <div style={style}>
@@ -199,9 +199,9 @@ const EditTable = (props) => {
                 /> 
             */}
             <Table
-                // options={{
-                //     headers,
-                // }}
+                options={{
+                    headers,
+                }}
                 width={width}
                 height={height}
                 dataSources={dataSources}

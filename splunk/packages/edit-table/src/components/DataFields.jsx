@@ -18,7 +18,6 @@ const DataFields = ({ data, handleChange, model }) => {
                         <ControlGroup label={fieldLabel} key={`group_${key}`}>
                             <Text
                                 canClear
-                                placeholder="value"
                                 key={`text_${key}`}
                                 name={key}
                                 value={data[key].toString()}
@@ -33,7 +32,6 @@ const DataFields = ({ data, handleChange, model }) => {
                     return (
                         <ControlGroup label={fieldLabel} key={`group_${key}`}>
                             <Number
-                                placeholder="value"
                                 key={`number_${key}`}
                                 name={key}
                                 value={data[key]}

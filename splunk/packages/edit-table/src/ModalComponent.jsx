@@ -10,7 +10,7 @@ const ModalStyle = {
 };
 
 const ModalBodyStyle = {
-    padding: 10,
+    padding: 24,
 };
 
 const ModalComponent = ({ onClose, onSave, data, open, model }) => {
