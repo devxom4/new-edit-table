@@ -11,10 +11,11 @@ const DataFields = ({ data, handleChange, model }) => {
         (key) => {
             const fieldDefinition = model[key];
             const { type, props, label } = fieldDefinition;
+            const fieldLabel = label || key;
             switch (type) {
                 case 'string': {
                     return (
-                        <ControlGroup label={label} key={`group_${key}`}>
+                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
                             <Text
                                 canClear
                                 placeholder="value"
@@ -30,7 +31,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
                 case 'number': {
                     return (
-                        <ControlGroup label={label} key={`group_${key}`}>
+                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
                             <Number
                                 placeholder="value"
                                 key={`number_${key}`}
@@ -45,7 +46,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
                 case 'boolean': {
                     return (
-                        <ControlGroup label={label} key={`group_${key}`}>
+                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
                             <Switch
                                 key={`switch_${key}`}
                                 name={key}
@@ -60,7 +61,7 @@ const DataFields = ({ data, handleChange, model }) => {
                 case 'enum': {
                     const { options } = fieldDefinition;
                     return (
-                        <ControlGroup label={label} key={`group_${key}`}>
+                        <ControlGroup label={fieldLabel} key={`group_${key}`}>
                             <Select
                                 key={`select_${key}`}
                                 name={key}
@@ -90,7 +91,7 @@ const DataFields = ({ data, handleChange, model }) => {
     console.log("model", model);
     console.log("sortedKey", Object.keys(data)
     .filter((key) => !!model[key])
-    .sort((key1, key2) => model[key1].order || 0 - model[key2].order || 0));
+    .sort((key1, key2) => model[key1].order - model[key2].order));
 
     return Object.keys(data)
         .filter((key) => !!model[key])

@@ -27,7 +27,6 @@ const EditTable = (props) => {
     const { id, dataSources, onRequestParamsChange, width, height, options } = props;
     const { splunkApp, collection: collectionName, model } = options;
     const { api } = useDashboardApi();
-    console.log(dataSources);
 
     const style = useMemo(
         () => ({
@@ -147,6 +146,14 @@ const EditTable = (props) => {
         );
     }
 
+    const fields = tableMetadata.dataFields;
+    const headers = fields.map((key) => model[key]?.label || key);
+
+    console.log(dataSources);
+    console.log(fields);
+    console.log(model);
+    console.log(headers);
+
     return (
         <div style={style}>
             {infoMessage.visible && (
@@ -192,6 +199,9 @@ const EditTable = (props) => {
                 /> 
             */}
             <Table
+                options={{
+                    headers,
+                }}
                 width={width}
                 height={height}
                 dataSources={dataSources}
