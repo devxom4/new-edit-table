@@ -27,6 +27,7 @@ const EditTable = (props) => {
     const { id, dataSources, onRequestParamsChange, width, height, options } = props;
     const { splunkApp, collection: collectionName, model } = options;
     const { api } = useDashboardApi();
+    console.log(dataSources);
 
     const style = useMemo(
         () => ({
