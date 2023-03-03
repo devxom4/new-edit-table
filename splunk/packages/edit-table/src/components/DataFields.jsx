@@ -14,11 +14,11 @@ const DataFields = ({ data, handleChange, model }) => {
                 return null;
             }
 
-            const { type, props } = fieldDefinition;
+            const { type, props, label } = fieldDefinition;
             switch (type) {
                 case 'string': {
                     return (
-                        <ControlGroup label={key} key={`group_${key}`}>
+                        <ControlGroup label={label} key={`group_${key}`}>
                             <Text
                                 canClear
                                 placeholder="value"
@@ -34,7 +34,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
                 case 'number': {
                     return (
-                        <ControlGroup label={key} key={`group_${key}`}>
+                        <ControlGroup label={label} key={`group_${key}`}>
                             <Number
                                 placeholder="value"
                                 key={`number_${key}`}
@@ -49,7 +49,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
                 case 'boolean': {
                     return (
-                        <ControlGroup label={key} key={`group_${key}`}>
+                        <ControlGroup label={label} key={`group_${key}`}>
                             <Switch
                                 key={`switch_${key}`}
                                 name={key}
@@ -64,7 +64,7 @@ const DataFields = ({ data, handleChange, model }) => {
                 case 'enum': {
                     const { options } = fieldDefinition;
                     return (
-                        <ControlGroup label={key} key={`group_${key}`}>
+                        <ControlGroup label={label} key={`group_${key}`}>
                             <Select
                                 key={`select_${key}`}
                                 name={key}
