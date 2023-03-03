@@ -114,7 +114,7 @@ const EditTable = (props) => {
         const emptyErrorMsg = 'No data to download.';
 
         try {
-            const data = await getAllKVEntries(collectionName, defaultErrorMsg);
+            const data = await getAllKVEntries(collectionName, defaultErrorMsg, splunkApp);
             if (data == null || data.length === 0) {
                 throw new Error(emptyErrorMsg);
             }
@@ -175,6 +175,7 @@ const EditTable = (props) => {
                 uploadModalOpen={uploadModalOpen}
                 setUploadModalOpen={setUploadModalOpen}
                 collectionName={collectionName}
+                splunkApp={splunkApp}
                 tableMetadata={tableMetadata}
                 setInfoMessage={setInfoMessage}
                 refreshVisualization={refreshVisualization}
@@ -198,7 +199,7 @@ const EditTable = (props) => {
             />
             <TableButtonActionGroup>
                 <Button disabled={downloading} onClick={handleDownloadAsCSV}>
-                    Download as CSV
+                    Download as CSV 123
                 </Button>
                 <Button onClick={onOpenUploadModal}>Upload CSV</Button>
             </TableButtonActionGroup>
