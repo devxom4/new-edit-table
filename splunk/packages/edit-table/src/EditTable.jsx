@@ -104,6 +104,9 @@ const EditTable = (props) => {
             }
             return row;
         }
+        console.log("handleCellClickEvent", e);
+        console.log("handleCellClickEvent.payload", e.payload);
+        console.log("handleCellClickEvent.payload.extractRow", extractRow(e.payload));
         // extract row from payload and call click handler
         handleEditActionClick(undefined, extractRow(e.payload));
     };
