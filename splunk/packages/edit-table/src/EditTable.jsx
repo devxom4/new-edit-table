@@ -199,7 +199,7 @@ const EditTable = (props) => {
             />
             <TableButtonActionGroup>
                 <Button disabled={downloading} onClick={handleDownloadAsCSV}>
-                    Download as CSV 123
+                    Download as CSV
                 </Button>
                 <Button onClick={onOpenUploadModal}>Upload CSV</Button>
             </TableButtonActionGroup>
