@@ -85,12 +85,6 @@ const DataFields = ({ data, handleChange, model, labelMap }) => {
         [data, handleChange, labelMap, model]
     );
 
-    console.log("data", data);
-    console.log("model", model);
-    console.log("sortedKey", Object.keys(data)
-    .filter((key) => !!model[key])
-    .sort((key1, key2) => model[key1].order - model[key2].order));
-
     return Object.keys(data)
         .filter((key) => !!model[key])
         .sort((key1, key2) => model[key1].order - model[key2].order)

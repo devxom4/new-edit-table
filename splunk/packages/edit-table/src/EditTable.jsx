@@ -119,10 +119,6 @@ const EditTable = (props) => {
             return newObj;
         }
 
-        console.log('handleCellClickEvent', e);
-        console.log('handleCellClickEvent.payload', e.payload);
-        console.log('handleCellClickEvent.payload.extractRow', extractRow(e.payload));
-        console.log('handleCellClickEvent.payload.extractRow.convertKey', convertLabelObjectToKey(extractRow(e.payload)));
         // extract row from payload and call click handler
         handleEditActionClick(undefined, convertLabelObjectToKey(extractRow(e.payload)));
     };
@@ -167,11 +163,6 @@ const EditTable = (props) => {
 
     const fields = tableMetadata.dataFields;
     const headers = fields.map((key) => labelMap.find(m => m.key === key)?.label || key);
-
-    console.log('dataSources', dataSources);
-    console.log('dataSources.fields', fields);
-    console.log('model', model);
-    console.log('headers', headers);
 
     return (
         <div style={style}>
