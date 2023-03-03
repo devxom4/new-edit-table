@@ -95,7 +95,7 @@ const DataFields = ({ data, handleChange, model }) => {
 
     return Object.keys(data)
         .filter((key) => !!model[key])
-        .sort((key1, key2) => model[key1].order || 0 - model[key2].order || 0)
+        .sort((key1, key2) => model[key1].order - model[key2].order)
         .map((key) => renderInputField(key));
 };
 

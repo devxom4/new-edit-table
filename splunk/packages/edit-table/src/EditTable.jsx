@@ -199,9 +199,9 @@ const EditTable = (props) => {
                 /> 
             */}
             <Table
-                options={{
-                    headers,
-                }}
+                // options={{
+                //     headers,
+                // }}
                 width={width}
                 height={height}
                 dataSources={dataSources}
